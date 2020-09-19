@@ -14,9 +14,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.lightGray};
   color:  ${({ theme }) => theme.colors.highlight};
   border-radius: ${({ theme }) => theme.radii.normal}px;
-
-
-  
+    
 ` 
 
 export const Icon = styled(Plus)`
