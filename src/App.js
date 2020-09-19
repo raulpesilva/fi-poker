@@ -8,7 +8,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyle />
-      
       <Styled.App>
         <Routes />
       </Styled.App>
