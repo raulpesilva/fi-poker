@@ -19,7 +19,7 @@ const Room = () => {
       <CreatorButton editable={true} onCreate={setTest} >Criar tarefa</CreatorButton>
       <CreatorButton onClick={() => console.log('testeeewe')}>Criar tarefa</CreatorButton>
       <TextArea placeholder='teste'></TextArea>
-      <CardCreator></CardCreator>
+      <CardCreator onCreate={data => console.log(data)} onCancel={() => console.log('testeasdasdew')}></CardCreator>
     </>
   );
 };
