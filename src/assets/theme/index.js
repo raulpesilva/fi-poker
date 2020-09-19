@@ -2,6 +2,7 @@ const theme = {
   colors: {
     darkGray: '#141414',
     gray: '#212121',
+    mediumGray: '#262626',
     lightGray: '#393939',
     highlight: '#ffffff',
     green: '#2ECC71',
@@ -15,6 +16,6 @@ const theme = {
     header: 42,
     title: 18,
   },
-};
+}
 
-export default theme;
+export default theme
