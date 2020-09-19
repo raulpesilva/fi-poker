@@ -62,6 +62,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@font-face {
+  font-family: 'GilRoy';
+  src: url('./assets/Fonts/Gilroy-Regular.otf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'GilRoy';
+  src: url('./assets/Fonts/Gilroy-Bold.otf');
+  font-weight: 700;
+}
 
 `;
 
