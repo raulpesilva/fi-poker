@@ -48,7 +48,10 @@ export const withModal = component => modal => {
 export const ModalProvider = ({ children, modals, style, applyTopPositionOffset }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const handleClose = () => dispatch({ type: 'clear' })
+  const handleClose = e => {
+    e.stopPropagation()
+    dispatch({ type: 'clear' })
+  }
 
   if (state && !modals) {
     console.warn(
