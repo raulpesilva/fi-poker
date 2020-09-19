@@ -73,4 +73,5 @@ export const App = styled.div`
   background-color: ${({ theme }) => theme.colors.gray};
   width: 100vw;
   height: 100vh;
+  display:flex;
 `;
