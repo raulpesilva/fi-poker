@@ -1,16 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Input = styled.input`
-  padding-left: 15px;
-  border: none;
-  outline: none;
-  width: ${({ width }) => width ? width : '360px'};
-  height: ${({ height }) => height ? height : '40px'};
+export const TextArea = styled.textarea`
+  width: ${({ width }) => width ? width : '272px'};
+  height: ${({ height }) => height ? height : '211px'};
   background-color: ${({ theme }) => theme.colors.lightGray};
   border-radius: ${({ theme }) => theme.radii.normal}px;
   color: ${({ theme }) => theme.colors.highlight};
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
   margin: ${({ margin }) => margin ? margin : 0 };
+  padding: 15px;
+  resize: none;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.highlight}4D;
@@ -19,4 +18,4 @@ export const Input = styled.input`
   &:focus{
     border: 1px solid ${({ theme }) => theme.colors.highlight};
   }
-`;
+`

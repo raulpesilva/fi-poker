@@ -4,7 +4,7 @@ import Login from '../pages/login';
 import Room from '../pages/room'
 
 const Routes = () => {
-  const logado = false;
+  const logado = true;
   return (
     <BrowserRouter>
       <Switch>
