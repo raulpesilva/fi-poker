@@ -1,10 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from '../pages/login';
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Login from '../pages/login'
 import Room from '../pages/room'
 
 const Routes = () => {
-  const logado = true;
+  const logado = true
   return (
     <BrowserRouter>
       <Switch>
@@ -18,7 +18,7 @@ const Routes = () => {
         )}
       </Switch>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default Routes;
+export default Routes
