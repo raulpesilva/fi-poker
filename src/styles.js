@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
    License: none (public domain)
 */
 
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,6 +25,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+  font-family: 'GilRoy', sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -49,29 +51,21 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+*{
+  box-sizing: border-box;
+  font-family: 'GilRoy', sans-serif;
+}
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'GilRoy', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-@font-face {
-  font-family: 'GilRoy';
-  src: url('./assets/Fonts/Gilroy-Regular.otf');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'GilRoy';
-  src: url('./assets/Fonts/Gilroy-Bold.otf');
-  font-weight: 700;
-}
+
 
 `;
 

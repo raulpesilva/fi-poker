@@ -7,6 +7,8 @@ export const Button = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
+  font-family: 'GilRoy', sans-serif;
+  
   ${({ theme: { colors: { highlight }, radii: { normal } }, color, textColor }) => css`
     background-color: ${color ? color : highlight};
     color: ${textColor ? textColor : '#000000'};

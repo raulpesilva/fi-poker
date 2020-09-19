@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import * as Styled from './styles';
 import theme from './assets/theme';
 import Routes from './routes';
+import './index.css'
 
 function App() {
   return (
