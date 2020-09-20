@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  flex: 1;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -9,12 +10,13 @@ export const Container = styled.div`
 
 export const Form = styled.div`
   width: 415px;
-  height: 487px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: ${({ theme }) => theme.radii.normal}px;
   background-color: ${({ theme }) => theme.colors.mediumGray};
+  padding-bottom: 30px;
 `
 
 export const Title = styled.h1`

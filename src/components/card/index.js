@@ -18,20 +18,22 @@ const Card = ({ title, description, characterLimit = 100, id, onDelete }) => {
   }
 
   const handleConfirmRemove = () => {
-    onDelete && onDelete(id);
+    onDelete && onDelete(id)
   }
 
   return (
     <Styled.Container>
       <Styled.RemoveWrapper>
         {removing ? (
-          <Styled.RemoveConfirmation onClick={handleConfirmRemove} >Clique para deletar</Styled.RemoveConfirmation>
+          <Styled.RemoveConfirmation onClick={handleConfirmRemove}>
+            Clique para deletar
+          </Styled.RemoveConfirmation>
         ) : (
           <Styled.Trash onClick={handleOnCardRemove} />
         )}
       </Styled.RemoveWrapper>
-      <Styled.Title>{title ?? 'Titulo'}</Styled.Title>
-      <Styled.Description>{ellipisDescription ?? 'Description'}</Styled.Description>
+      <Styled.Title>{title || 'Titulo'}</Styled.Title>
+      <Styled.Description>{ellipisDescription || 'Description'}</Styled.Description>
     </Styled.Container>
   )
 }
