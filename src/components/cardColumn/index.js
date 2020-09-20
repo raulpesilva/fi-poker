@@ -4,11 +4,15 @@ import useModal from '../../hook/useModal'
 import Card from '../card'
 import EditableCard from '../editableCard'
 import * as Styled from './styles'
+import api from '../../api'
+import { useParams } from 'react-router-dom'
 
 const CardColumn = () => {
   const [cardList, setCardList] = useState([])
   const { sendMessage } = useModal()
-  const [cards] = useStorage('cards')
+  const [ cards ] = useStorage('cards')
+  const { id } = useParams()
+
   const authTrello = () => {
     var authenticationSuccess = function () {
       console.log('Successful authentication')
@@ -30,6 +34,7 @@ const CardColumn = () => {
       error: authenticationFailure,
     })
   }
+  
 
   const handleOnCardCreate = data => {
     setCardList([...cardList, data])
@@ -58,7 +63,7 @@ const CardColumn = () => {
           onDelete={handleOnCardDelete}
         />
       ))}
-      {cards?.map(({ name, desc, id }) => (
+      {cards?.cardList?.map(({ name, desc, id }) => (
         <Card title={name} description={desc} key={id} id={id} onDelete={handleOnCardDelete} />
       ))}
     </Styled.Container>

@@ -6,13 +6,14 @@ import Input from '../../components/shared/input'
 import Button from '../../components/shared/button'
 import { useParams } from 'react-router-dom'
 import api from '../../api'
+import useStorage from '../../hook/useStorage'
 
 const Login = ({ setLogedIn }) => {
   const nameRef = useRef()
   const roomIdRef = useRef()
   const newRoomRef = useRef()
   const { id } = useParams()
-  const [ idRoom, setIdRoom ] = useState(null)
+  const [ ,setIdRoom ] = useStorage('idRoom')
   const history = useHistory();
 
   const handleCreateRoom = async () => {
@@ -32,15 +33,13 @@ const Login = ({ setLogedIn }) => {
   const handleJoinRoom = async () => {
     const newRoomName = id ?? roomIdRef.current.value;
     const userName = nameRef.current.value;
-    console.log(newRoomName);
 
     const { data } = await api.post(`/rooms/join/${newRoomName}`,  {
       name: userName
     });
 
-
     setLogedIn(true)
-    setIdRoom(newRoomName)
+    setIdRoom(data._id)
   }
 
   return (

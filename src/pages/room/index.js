@@ -5,15 +5,19 @@ import useModal from '../../hook/useModal'
 import { useParams } from 'react-router-dom'
 import * as Styled from './styles'
 import UserList from '../../components/UserList'
+import useStorage from '../../hook/useStorage'
 
 const Room = () => {
   const { sendMessage } = useModal()
   const { id } = useParams()
 
+  const [ idRoom ] = useStorage('idRoom')
+
   useEffect(() => {
     console.log(id)
   }, [id]);
 
+  console.log('idrooommmmm', idRoom);
 
   const handleCLick = () => {
     sendMessage({ type: 'default' })
@@ -31,7 +35,7 @@ const Room = () => {
       <Button onClick={handleCLick}>Entrar</Button>
       <Button onClick={handleOpenRoom}>sala</Button>
       <Styled.Main>
-        <CardColumn />
+        <CardColumn codeRoom={id}/>
         <UserList />
       </Styled.Main>
     </>
