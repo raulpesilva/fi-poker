@@ -94,11 +94,14 @@ const Room = () => {
     socket.on('VOTE_UPDATED', data => {
       if (data.data.roomId === idRoom && !voteSessionFinished) {
         console.log('VOTE_UPDATED', data)
+        setVoteSessionFinished(true)
       }
     })
     socket.on('CARD_VOTED', data => {
       if (data.data.roomId === idRoom && !voteSessionFinished) {
         console.log('CARD_VOTED', data)
+        setVoteSessionFinished(true)
+
         if (votes?.[0]) {
           setVotes([...votes, data.data])
           console.log([...votes, data.data])

@@ -35,6 +35,7 @@ const Voting = ({ title, description, id, roomId }) => {
         {votes?.map?.((vote, index) => {
           return (
             <Styled.Card vote={`card-${index}-${Math.random() * 9999}`}>
+              {console.log(voteSessionFinished)}
               {voteSessionFinished && <Styled.Points>{vote.vote}</Styled.Points>}
             </Styled.Card>
           )
