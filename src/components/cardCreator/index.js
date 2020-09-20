@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useRef } from 'react'
 import * as Styled from './styles'
 import Input from '../shared/input'
@@ -45,20 +44,3 @@ const CardCreator = ({ onCreate, onCancel }) => {
 }
 
 export default CardCreator
-=======
-import React from 'react'
-import * as Styled from  './styles'
-import Input from '../shared/input'
-import TextArea from '../shared/textArea'
-
-const CardCreator = () => {
-  return (
-    <Styled.Container>
-      <Input width='100%'></Input>
-      <TextArea></TextArea>
-    </Styled.Container>
-  )
-} 
-
-export default CardCreator
->>>>>>> b2253555b2f0cd39c27aa1ad69dec3f3886e0ab6
