@@ -11,12 +11,12 @@ const CardColumn = () => {
   const [ cards ] = useStorage('cards')
 
   const authTrello = () => {
-    var authenticationSuccess = function () {
+    const authenticationSuccess = function () {
       console.log('Successful authentication')
       sendMessage({ type: 'selectBoard' })
     }
 
-    var authenticationFailure = function () {
+    const authenticationFailure = function () {
       console.log('Failed authentication')
     }
 
@@ -31,7 +31,10 @@ const CardColumn = () => {
       error: authenticationFailure,
     })
   }
-  
+
+  useEffect(() => {
+    console.log('cards', cards);
+  }, [cards])
 
   const handleOnCardCreate = data => {
     setCardList([...cardList, data])

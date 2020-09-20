@@ -12,10 +12,8 @@ const SelectBoard = () => {
   const [_, setCards] = useStorage('cards')
   const [ idRoom ] = useStorage('idRoom')
 
-
   useEffect(() => {
     window.Trello.get('/members/me/boards').then(response => {
-      console.log(response)
       setBoards(response)
     })
   }, [])
