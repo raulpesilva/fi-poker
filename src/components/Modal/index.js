@@ -1,17 +1,23 @@
 import React from 'react'
+import Button from '../shared/button'
+import Input from '../shared/input'
 import * as Styled from './styles'
-
-const Modal = ({ type, title, descriptionTitle, description }) => {
+const Modal = () => {
   const handleClick = e => {
     e.stopPropagation()
   }
   return (
     <Styled.Modal onClick={handleClick}>
-      <Styled.Title>{title ?? 'Placeholder Title'}</Styled.Title>
-      <Styled.DescriptionTitle>
-        {descriptionTitle ?? 'Placeholder Title Description'}
-      </Styled.DescriptionTitle>
-      <Styled.Description>{description ?? 'Placeholder Description'}</Styled.Description>
+      <Styled.SeparatorMedium />
+      <Styled.Icon />
+      <Styled.SeparatorMedium />
+      <Styled.Title>Digite seu token</Styled.Title>
+      <Styled.Separator />
+      <Input placeholder="Token" />
+      <Styled.Separator />
+      <Button>Entrar</Button>
+      <Styled.Separator />
+      <Button outlined>Obter token</Button>
     </Styled.Modal>
   )
 }

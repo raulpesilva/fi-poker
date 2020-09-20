@@ -5,15 +5,25 @@ import TextArea from '../../components/shared/textArea'
 import CreatorButton from '../../components/creatorButton'
 import CardCreator from '../../components/cardCreator'
 import useModal from '../../hook/useModal'
+import { useParams } from 'react-router-dom'
 
 const Room = () => {
   const [teste, setTest] = useState('')
   const { sendMessage } = useModal()
+  let { id } = useParams()
   useEffect(() => {
-    console.log(teste)
-  }, [teste])
+    console.log(id)
+  }, [id])
   const handleCLick = () => {
-    sendMessage({ title: 'tests' })
+    sendMessage()
+  }
+
+  const handleOpenRoom = () => {
+    sendMessage({
+      type: 'voting',
+      title: 'tests',
+      description: 'asdl jflasdjf lasjdklafjs ljafslçdfj lasjdfl jasdlfjals jd',
+    })
   }
   return (
     <>
@@ -22,7 +32,7 @@ const Room = () => {
       <CreatorButton editable={true} onCreate={setTest}>
         Criar tarefa
       </CreatorButton>
-      <CreatorButton onClick={() => console.log('testeeewe')}>Criar tarefa</CreatorButton>
+      <CreatorButton onClick={handleOpenRoom}>Criar tarefa</CreatorButton>
       <TextArea placeholder="teste"></TextArea>
       <CardCreator></CardCreator>
     </>
