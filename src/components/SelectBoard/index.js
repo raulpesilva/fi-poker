@@ -26,10 +26,12 @@ const SelectBoard = () => {
   }
   const handleSelectList = list => {
     window.Trello.get(`/lists/${list.id}/cards`).then(response => {
-      setCards({ cardList: response, list })
-      const formatedCards = response?.reduce((acc, card) => {
+      const formatedCards = response?.reduce((acc, card, index) => {
+        setCards({ cardList: response, list })
+        console.log('formatedCards', response);
         return [...acc, { title: card.name, description: card.desc, meta: response.list }]
       }, [])
+
 
       api
         .post(`/rooms/${idRoom}/cards`, { cards: formatedCards })
