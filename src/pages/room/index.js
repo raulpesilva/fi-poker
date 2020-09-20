@@ -44,74 +44,67 @@ const Room = () => {
     }
 
     socket.on('ROOM_CONFIG_UPDATED', data => {
-      console.log('ROOM_CONFIG_UPDATED', data)
+      if (data.data.roomId === idRoom) {
+        console.log('ROOM_CONFIG_UPDATED', data)
+      }
     })
     socket.on('NEW_ROOM_PARTICIPANT', data => {
-      console.log('NEW_ROOM_PARTICIPANT', data)
       if (data.data.roomId === idRoom) {
+        console.log('NEW_ROOM_PARTICIPANT', data)
         getUsers()
       }
     })
     socket.on('NEW_CARDS_ADDED', data => {
-      console.log('NEW_CARDS_ADDED', data)
       if (data.data.roomId === idRoom) {
+        console.log('NEW_CARDS_ADDED', data)
         getAtualList()
       }
     })
     socket.on('CARD_STAGED_TO_VOTE', data => {
-      console.log('CARD_STAGED_TO_VOTE', data)
       if (data.data.roomId === idRoom) {
+        console.log('CARD_STAGED_TO_VOTE', data)
         const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
-        // console.log('cccccccccccccccaaa', card, cards)
+        console.log('cccccccccccccccaaa', card, cards)
         if (card) {
           sendMessage({ type: 'voting', title: card.name, description: card.desc })
         }
       }
     })
     socket.on('VOTE_SESSION_FINISHED', data => {
-      console.log('VOTE_SESSION_FINISHED', data)
+      if (data.data.roomId === idRoom) {
+        console.log('VOTE_SESSION_FINISHED', data)
+      }
     })
     socket.on('VOTE_UPDATED', data => {
-      console.log('VOTE_UPDATED', data)
+      if (data.data.roomId === idRoom) {
+        console.log('VOTE_UPDATED', data)
+      }
     })
     socket.on('CARD_VOTED', data => {
-      console.log('CARD_VOTED', data)
+      if (data.data.roomId === idRoom) {
+        console.log('CARD_VOTED', data)
+      }
     })
     // return () => socket && socket.disconnect && socket.disconnect()
-  }, [cards, getAtualList, sendMessage, socket])
+  }, [socket, cards])
 
   useEffect(() => {
     getUsers()
-  }, [getUsers, idRoom])
+  }, [getUsers])
 
   useEffect(() => {
     getAtualList()
-  }, [getAtualList, idRoom])
+  }, [getAtualList])
 
   useEffect(() => {
     setSocket(io(SOCKET_ORIGIN, {}))
   }, [])
 
-  const handleCLick = () => {
-    sendMessage({ type: 'default' })
-  }
-
-  const handleOpenRoom = () => {
-    sendMessage({
-      type: 'voting',
-      title: 'tests',
-      description: 'asdl jflasdjf lasjdklafjs ljafslçdfj lasjdfl jasdlfjals jd',
-    })
-  }
   return (
-    <>
-      <Button onClick={handleCLick}>Entrar</Button>
-      <Button onClick={handleOpenRoom}>sala</Button>
-      <Styled.Main>
-        <CardColumn />
-        <UserList />
-      </Styled.Main>
-    </>
+    <Styled.Main>
+      <CardColumn />
+      <UserList />
+    </Styled.Main>
   )
 }
 

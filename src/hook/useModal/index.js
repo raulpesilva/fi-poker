@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useReducer, useMemo } from 'react'
+import React, { useContext, createContext, useReducer, useMemo, useCallback } from 'react'
 import Wrapper from './Wrapper'
 
 const initialState = undefined
@@ -29,9 +29,9 @@ const useModalContext = () => {
 const useModal = () => {
   const [state, dispatch] = useModalContext()
 
-  const sendMessage = value => {
+  const sendMessage = useCallback(value => {
     dispatch({ type: 'set', payload: value })
-  }
+  }, [])
 
   return { state, sendMessage }
 }
