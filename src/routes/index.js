@@ -1,11 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { ModalProvider } from '../hook/useModal'
 import Login from '../pages/login'
 import Room from '../pages/room'
-import Modal from '../components/Modal'
-import Voting from '../components/Voting'
-import SelectBoard from '../components/SelectBoard'
 
 const Routes = () => {
   const logado = true
@@ -13,10 +9,10 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {logado ? (
-          <ModalProvider modals={{ default: Modal, voting: Voting, selectBoard: SelectBoard }}>
+          <>
             <Route exact path="/" component={() => <h1>logado</h1>} />
             <Route path="/room/:id" component={Room} />
-          </ModalProvider>
+          </>
         ) : (
           <Route exact path="/" component={Login} />
         )}
