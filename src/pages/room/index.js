@@ -62,8 +62,13 @@ const Room = () => {
         const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
         console.log('cccccccccccccccaaa', card, cards)
         if (card) {
-          sendMessage({ type: 'voting', title: card.name, description: card.desc })
-          setVoteSessionFinished(false)
+          sendMessage({
+            id: card.id,
+            type: 'voting',
+            title: card.name,
+            description: card.desc,
+            roomId: data.data.roomId,
+          })
         }
       }
     })

@@ -3,7 +3,17 @@ import React from 'react'
 import useStorage from '../../hook/useStorage'
 import * as Styled from './styles'
 
-const colorDictionary = ['#0794FF', '#EB5151', '#51EBDB']
+const colorDictionary = [
+  '#c3cec2',
+  '#789DE1',
+  '#6EA2A8',
+  '#3AAADB',
+  '#AC76EA',
+  '#45549F',
+  '#7EBF76',
+  '#554866',
+  '#FEB124',
+]
 
 const UserList = () => {
   const [users] = useStorage('users')
