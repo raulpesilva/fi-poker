@@ -5,20 +5,20 @@ import TextArea from '../shared/textArea'
 import Button from '../shared/button'
 
 const CardCreator = ({ onCreate, onCancel }) => {
-  const cardId = Math.floor(Math.random() * 999999);
+  const cardId = Math.floor(Math.random() * 999999)
   const titleRef = useRef()
   const descriptionRef = useRef()
 
-  const hendleClickConclude = () => {
-    const title = titleRef?.current?.value;
-    const description = descriptionRef?.current?.value;
+  const handleClickConclude = () => {
+    const title = titleRef?.current?.value
+    const description = descriptionRef?.current?.value
 
-    console.log({ title, description, _id: cardId });
-    onCreate && onCreate({ name: title, description, _id: cardId });
+    console.log({ title, description, _id: cardId })
+    onCreate && onCreate({ title, description, _id: cardId })
   }
 
-  const hendleClickCancel = () => {
-    onCancel && onCancel();
+  const handleClickCancel = () => {
+    onCancel && onCancel()
   }
 
   return (
@@ -31,11 +31,11 @@ const CardCreator = ({ onCreate, onCancel }) => {
           color="red"
           textColor="highlight"
           margin="0 23px"
-          onClick={hendleClickCancel}
+          onClick={handleClickCancel}
         >
           Cancelar
         </Button>
-        <Button width="80px" color="green" textColor="highlight" onClick={hendleClickConclude}>
+        <Button width="80px" color="green" textColor="highlight" onClick={handleClickConclude}>
           Concluir
         </Button>
       </Styled.ButtonWrapper>
