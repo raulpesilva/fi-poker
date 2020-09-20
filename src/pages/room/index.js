@@ -52,6 +52,7 @@ const Room = () => {
       if (data.data.roomId === idRoom) {
         console.log('NEW_ROOM_PARTICIPANT', data)
         getUsers()
+        getAtualList()
       }
     })
     socket.on('NEW_CARDS_ADDED', data => {
