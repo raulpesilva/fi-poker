@@ -41,7 +41,6 @@ const Login = ({ setLogedIn }) => {
     setLogedIn(true)
     setIdRoom(data._id)
     history.push(`/${data.code}`)
-
   }
 
   return (

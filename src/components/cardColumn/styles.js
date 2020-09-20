@@ -3,14 +3,15 @@ import { FaTrello } from 'react-icons/fa'
 
 export const Container = styled.ul`
   width: ${({ width }) => width ?? '294px'};
+
   background-color: ${({ theme }) => theme.colors.darkGray};
   border-radius: ${({ theme }) => theme.radii.normal}px;
   display: flex;
   flex-direction: column;
-  max-height: 100%;
-  height: 100%;
   overflow: auto;
   padding: 13px;
+  width: 294px;
+  height: 90vh;
 `
 
 export const CreatorWrapper = styled.div`
@@ -27,7 +28,7 @@ export const IntegrationIcon = styled(FaTrello)`
   transition: 200ms;
   cursor: pointer;
 
-  &:hover{
-    transform: scale(.9);
+  &:hover {
+    transform: scale(0.9);
   }
 `

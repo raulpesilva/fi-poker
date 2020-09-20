@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useStorage from '../../hook/useStorage'
 import useModal from '../../hook/useModal'
 import Card from '../card'
@@ -14,13 +14,10 @@ const CardColumn = () => {
 
   const authTrello = () => {
     var authenticationSuccess = function () {
-      // console.log('Successful authentication')
       sendMessage({ type: 'selectBoard' })
     }
 
-    var authenticationFailure = function () {
-      // console.log('Failed authentication')
-    }
+    var authenticationFailure = function () {}
 
     window.Trello.authorize({
       type: 'popup',
@@ -40,7 +37,9 @@ const CardColumn = () => {
     console.log('aquiii', data)
   }
   const handleOnCardCreate = data => {
-    setCardList([...cardList, data])
+    api.post(`/rooms/${idRoom}/cards`, { cards: [data] }).then(response => {
+      console.log('handleCreate', response)
+    })
   }
 
   const handleOnCardDelete = id => {
