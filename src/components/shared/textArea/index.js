@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import * as Styled from './styles'
 
-const TextArea = ({ ...props }) => {
-  return (<Styled.TextArea {...props}/>)
+const TextArea = (props, ref) => {
+  return (<Styled.TextArea ref={ref} {...props}/>)
 }
 
-export default TextArea;
+export default forwardRef(TextArea);

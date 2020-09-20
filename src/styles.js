@@ -36,9 +36,10 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
+ol, ul, li {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
@@ -73,5 +74,4 @@ export const App = styled.div`
   background-color: ${({ theme }) => theme.colors.gray};
   width: 100vw;
   height: 100vh;
-  display:flex;
 `;

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import * as Styled from './styles';
 
-const Input = ({ ...props }) => {
-  return(<Styled.Input {...props}></Styled.Input>)
+const Input = ( props, ref ) => {
+  return(<Styled.Input {...props} ref={ref}></Styled.Input>)
 }
 
-export default Input;
+export default forwardRef(Input);
 
