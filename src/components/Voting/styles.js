@@ -56,8 +56,22 @@ export const WrapperCards = styled.div`
     margin-left: 10px;
   }
 `
+const colors = {
+  vote0: 'top, #c3cec2 0%, #AFC8B9 100%',
+  vote1: 'top, #789DE1 0%, #8BB0F2 100%',
+  vote2: 'top, #6EA2A8 0%, #70B9BF 100%',
+  vote3: 'top, #3AAADB 0%, #34C5ED 100%',
+  vote5: 'top, #AC76EA 0%, #BD90EE 100%',
+  vote8: 'top, #45549F 0%, #334280 100%',
+  vote: 'top, #7EBF76 0%, #98D27F 100%',
+  voteInfinity: 'top, #554866 0%, #6A607A 100%',
+  voteCoffee: 'top, #FEB124 0%, #FEB24A 100%',
+}
 export const Card = styled.div`
-  background-color: ${({ theme }) => theme.colors.darkGray};
+  background: -webkit-linear-gradient(top, #c3cec2 0%, #131313 100%); /* Chrome10-25,Safari5.1-6 */
+  background: -webkit-linear-gradient(
+    ${({ color }) => (color ? colors[color] : 'top, #c3cec2 0%, #131313 100%')}
+  ); /* Chrome10-25,Safari5.1-6 */
   border-radius: ${({ theme }) => theme.radii.normal}px;
   width: 115px;
   height: 158px;
