@@ -21,36 +21,36 @@ const Login = ({ setLogedIn }) => {
     const newRoomName = newRoomRef.current.value
     const userName = nameRef.current.value
 
-    const { data: { room } } = await api.post('/rooms', {
+    const { data } = await api.post('/rooms', {
       roomName: newRoomName,
       userName,
     })
 
-    console.log('dataaa', room);
-
-    const roomId = room._id;
+    setUserId(data.owner._id);
+    
+    const roomId = data.room?._id;
     
     const { data: dataConfig } = await api.post(`/rooms/${roomId}/config`, {
       sequence: ['0', '1', '2', '3', '5', '8', '?', 'infinity', 'coffee']
     })
 
-    setIdRoom(room._id)
+    data?.room?._id && setIdRoom(data.room._id)
     setLogedIn(true)
-    history.push(`/${room.code}`)
+    history.push(`/${data?.room?.code}`)
   }
   
   const handleJoinRoom = async () => {
     const newRoomName = id ?? roomIdRef.current.value
     const userName = nameRef.current.value
     
-    const { data: { room } } = await api.post(`/rooms/join/${newRoomName}`, {
+    const { data } = await api.post(`/rooms/join/${newRoomName}`, {
       name: userName,
     })
+
     
-    console.log('userid', room);
+    setUserId(data._id);
+    
     setLogedIn(true)
-    setIdRoom(room._id)
-    history.push(`/${room.code}`)
   }
 
   return (
