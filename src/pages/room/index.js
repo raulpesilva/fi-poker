@@ -32,7 +32,7 @@ const Room = () => {
   const getUsers = useCallback(
     user => {
       api.get(`/rooms/${idRoom}`).then(({ data }) => {
-        setUsers(data.participants)
+        setUsers(data?.participants ?? [])
         // console.log(data.participants)
       })
     },
