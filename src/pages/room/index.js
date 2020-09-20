@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Button from '../../components/shared/button'
 import CardColumn from '../../components/cardColumn'
 import useModal from '../../hook/useModal'
@@ -17,9 +17,27 @@ const Room = () => {
   const [socket, setSocket] = useState({})
   const [idRoom] = useStorage('idRoom')
   const [cards, setCards] = useStorage('cards')
+  const [, setUsers] = useStorage('users')
 
   // const { idRoom } = useParams()
+  const getAtualList = useCallback(async () => {
+    const { data } = await api.get(`/rooms/${idRoom}`)
 
+    const formatedData = data?.cards?.reduce((acc, card) => {
+      return [...acc, { name: card.title, desc: card.description, id: card._id }]
+    }, [])
+
+    console.log('formateddata', formatedData)
+
+    setCards({ cardList: formatedData })
+  }, [idRoom, setCards])
+
+  const getUsers = useCallback(() => {
+    api.get(`/rooms/${idRoom}`).then(({ data }) => {
+      setUsers(data.participants)
+      console.log(data.participants)
+    })
+  }, [idRoom, setUsers])
   useEffect(() => {
     if (!(socket && socket.on)) {
       return
@@ -30,16 +48,24 @@ const Room = () => {
     })
     socket.on('NEW_ROOM_PARTICIPANT', data => {
       console.log('NEW_ROOM_PARTICIPANT', data)
+      if (data.data.roomId === idRoom) {
+        getUsers()
+      }
     })
     socket.on('NEW_CARDS_ADDED', data => {
       console.log('NEW_CARDS_ADDED', data)
+      if (data.data.roomId === idRoom) {
+        getAtualList()
+      }
     })
     socket.on('CARD_STAGED_TO_VOTE', data => {
       console.log('CARD_STAGED_TO_VOTE', data)
-      const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
-      // console.log('cccccccccccccccaaa', card, cards)
-      if (card) {
-        sendMessage({ type: 'voting', title: card.name, description: card.desc })
+      if (data.data.roomId === idRoom) {
+        const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
+        // console.log('cccccccccccccccaaa', card, cards)
+        if (card) {
+          sendMessage({ type: 'voting', title: card.name, description: card.desc })
+        }
       }
     })
     socket.on('VOTE_SESSION_FINISHED', data => {
@@ -52,23 +78,15 @@ const Room = () => {
       console.log('CARD_VOTED', data)
     })
     // return () => socket && socket.disconnect && socket.disconnect()
-  }, [cards, sendMessage, socket])
+  }, [cards, getAtualList, sendMessage, socket])
 
-  const getAtualList = async () => {
-    const { data } = await api.get(`/rooms/${idRoom}`)
-
-    const formatedData = data?.cards?.reduce((acc, card) => {
-      return [...acc, { name: card.title, desc: card.description, id: card._id }]
-    }, [])
-
-    console.log('formateddata', formatedData)
-
-    setCards({ cardList: formatedData })
-  }
+  useEffect(() => {
+    getUsers()
+  }, [getUsers, idRoom])
 
   useEffect(() => {
     getAtualList()
-  }, [idRoom])
+  }, [getAtualList, idRoom])
 
   useEffect(() => {
     setSocket(io(SOCKET_ORIGIN, {}))

@@ -25,17 +25,11 @@ import * as Styled from './styles'
 const colorDictionary = ['#0794FF', '#EB5151', '#51EBDB']
 
 const UserList = () => {
-  const [users, setUsers] = useState([])
-  const [idRoom] = useStorage('idRoom')
-  useEffect(() => {
-    api.get(`/rooms/${idRoom}`).then(({ data }) => {
-      setUsers(data.participants)
-      console.log(data.participants)
-    })
-  }, [])
+  const [users] = useStorage('users')
+  console.log('asdfasdf', users)
   return (
     <Styled.Container>
-      {users.map((user, index) => {
+      {users?.map((user, index) => {
         return (
           <Styled.User key={user._id}>
             <Styled.initial color={colorDictionary[index % colorDictionary.length]}>
