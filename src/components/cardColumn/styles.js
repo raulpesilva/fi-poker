@@ -12,6 +12,7 @@ export const Container = styled.ul`
   padding: 13px;
   width: 294px;
   height: 90vh;
+  margin-right: 10px;
 `
 
 export const CreatorWrapper = styled.div`

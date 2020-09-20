@@ -31,10 +31,7 @@ const CardColumn = () => {
     })
   }
   const handleSelectCard = async card => {
-    const a = await api.post(`/rooms/${idRoom}/cards/${card.id}/stage`)
-    const { data } = await api.get(`/rooms/${idRoom}`)
-
-    console.log('aquiii', data)
+    api.post(`/rooms/${idRoom}/cards/${card.id}/stage`)
   }
   const handleOnCardCreate = data => {
     api.post(`/rooms/${idRoom}/cards`, { cards: [data] }).then(response => {

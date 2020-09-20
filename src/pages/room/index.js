@@ -96,10 +96,17 @@ const Room = () => {
   }, [])
 
   return (
-    <Styled.Main>
-      <CardColumn />
-      <UserList />
-    </Styled.Main>
+    <>
+      <Styled.Header>
+        <Styled.Logo>Fi Poker</Styled.Logo>
+      </Styled.Header>
+      <Styled.Main>
+        <Styled.WrapperColumns>
+          <CardColumn />
+        </Styled.WrapperColumns>
+        <UserList />
+      </Styled.Main>
+    </>
   )
 }
 

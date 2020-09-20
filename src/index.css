@@ -3,7 +3,7 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #212121;
+  background: #ccc;
   border-radius: 4px;
 }
 
