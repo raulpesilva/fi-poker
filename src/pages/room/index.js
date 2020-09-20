@@ -26,13 +26,14 @@ const Room = () => {
       return [...acc, { name: card.title, desc: card.description, id: card._id }]
     }, [])
 
-    setCards({ cardList: formatedData })
+    data?.cards && setCards({ cardList: formatedData })
+    console.log('asdfasdasdfasdfasdf', idRoom)
   }, [idRoom, setCards])
 
   const getUsers = useCallback(
     user => {
       api.get(`/rooms/${idRoom}`).then(({ data }) => {
-        setUsers(data?.participants ?? [])
+        data?.participants && setUsers(data?.participants)
         // console.log(data.participants)
       })
     },

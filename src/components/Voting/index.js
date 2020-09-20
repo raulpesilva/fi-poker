@@ -6,8 +6,8 @@ import * as Styled from './styles'
 
 const Voting = ({ title, description, id, roomId }) => {
   const [userId] = useStorage('userId')
-  const [votes, setVotes] = useStorage('votes')
-  const [voteSessionFinished, setVoteSessionFinished] = useStorage('voteSessionFinished')
+  const [votes] = useStorage('votes')
+  const [voteSessionFinished] = useStorage('voteSessionFinished')
 
   const handleClick = e => {
     e.stopPropagation()

@@ -43,11 +43,14 @@ const Login = ({ setLogedIn }) => {
     const newRoomName = id ?? roomIdRef.current.value
     const userName = nameRef.current.value
 
-    const { data } = await api.post(`/rooms/join/${newRoomName}`, {
+    const {
+      data: { room, participant },
+    } = await api.post(`/rooms/join/${newRoomName}`, {
       name: userName,
     })
-
-    setUserId(data._id)
+    setIdRoom(room._id)
+    console.log(room)
+    setUserId(participant._id)
     setLogedIn(true)
   }
 
