@@ -64,7 +64,7 @@ const CardColumn = () => {
           onDelete={handleOnCardDelete}
         />
       ))}
-      {cards?.map(card => (
+      {cards?.cardList?.map(card => (
         <Card
           onClick={() => handleSelectCard(card)}
           title={card.name}

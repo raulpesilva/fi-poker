@@ -64,7 +64,7 @@ const Room = () => {
       <Button onClick={handleCLick}>Entrar</Button>
       <Button onClick={handleOpenRoom}>sala</Button>
       <Styled.Main>
-        <CardColumn />
+        <CardColumn/>
         <UserList />
       </Styled.Main>
     </>
