@@ -13,15 +13,33 @@ const Voting = ({ title, description }) => {
       <Styled.Description>{description}</Styled.Description>
       <Styled.Board></Styled.Board>
       <Styled.WrapperCards>
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
-        <Styled.Card />
+        <Styled.Card>
+          <Styled.Points>0</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>1</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>2</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>3</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>5</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>8</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.Points>?</Styled.Points>
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.InfinityIcon />
+        </Styled.Card>
+        <Styled.Card>
+          <Styled.CoffeeIcon />
+        </Styled.Card>
       </Styled.WrapperCards>
     </Styled.Container>
   )

@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { FiCoffee } from 'react-icons/fi'
+import { CgInfinity } from 'react-icons/cg'
 
 export const Container = styled.div`
   width: 90vw;
@@ -41,7 +43,6 @@ export const Description = styled.p`
 export const Board = styled.div`
   flex: 1;
   width: 80%;
-
   margin-top: 10px;
   background-color: ${({ theme }) => theme.colors.darkGray};
   border-radius: ${({ theme }) => theme.radii.normal}px;
@@ -49,6 +50,7 @@ export const Board = styled.div`
 export const WrapperCards = styled.div`
   margin-top: 10px;
   display: flex;
+
   width: 70vw;
   & div + div {
     margin-left: 10px;
@@ -59,5 +61,21 @@ export const Card = styled.div`
   border-radius: ${({ theme }) => theme.radii.normal}px;
   width: 115px;
   height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+`
+export const Points = styled.p`
+  font-size: 70px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.highlight};
+`
+export const CoffeeIcon = styled(FiCoffee).attrs({ size: 70 })`
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.highlight};
+`
+export const InfinityIcon = styled(CgInfinity).attrs({ size: 70 })`
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.highlight};
 `
