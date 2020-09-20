@@ -12,21 +12,21 @@ const SelectBoard = () => {
 
   useEffect(() => {
     window.Trello.get('/members/me/boards').then(response => {
-      console.log(response)
+      // console.log(response)
       setBoards(response)
     })
   }, [])
   const handleSelectBoard = board => {
     //https://api.trello.com/1/boards/${listkey}/lists?key=${key}&token=${token}
     window.Trello.get(`/boards/${board.id}/lists`).then(response => {
-      console.log(response)
+      // console.log(response)
       setLists(response)
     })
   }
   const handleSelectList = list => {
     //https://api.trello.com/1/lists/${listkey}/cards?key=${key}&token=${token}
     window.Trello.get(`/lists/${list.id}/cards`).then(response => {
-      console.log('vnjbvnkdvnkb', response)
+      // console.log('vnjbvnkdvnkb', response)
       setCards(response)
     })
   }

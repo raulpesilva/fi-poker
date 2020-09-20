@@ -20,8 +20,26 @@ const Room = () => {
       return
     }
 
-    socket.on('CARD_STAGED_TO_VOTE', () => {
-      console.log('CARD_STAGED_TO_VOTE')
+    socket.on('ROOM_CONFIG_UPDATED', data => {
+      console.log('ROOM_CONFIG_UPDATED', data)
+    })
+    socket.on('NEW_ROOM_PARTICIPANT', data => {
+      console.log('NEW_ROOM_PARTICIPANT', data)
+    })
+    socket.on('NEW_CARDS_ADDED', data => {
+      console.log('NEW_CARDS_ADDED', data)
+    })
+    socket.on('CARD_STAGED_TO_VOTE', data => {
+      console.log('CARD_STAGED_TO_VOTE', data)
+    })
+    socket.on('VOTE_SESSION_FINISHED', data => {
+      console.log('VOTE_SESSION_FINISHED', data)
+    })
+    socket.on('VOTE_UPDATED', data => {
+      console.log('VOTE_UPDATED', data)
+    })
+    socket.on('CARD_VOTED', data => {
+      console.log('CARD_VOTED', data)
     })
     // return () => socket && socket.disconnect && socket.disconnect()
   }, [socket])
