@@ -26,6 +26,7 @@ export const Card = styled.div`
   margin-left: 10px;
   margin-top: 10px;
   padding: 10px;
+  cursor: pointer;
   box-sizing: border-box;
   border-radius: ${({ theme }) => theme.radii.normal}px;
   ${({ url }) =>
@@ -40,9 +41,6 @@ export const Title = styled.h4`
   font-size: ${({ theme }) => theme.fontSize.title}px;
   text-shadow: 0 0 6px #000000dc;
   font-weight: 600;
-  font-smooth: antialiased;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: antialiased;
 `
 export const Wrapper = styled.div`
   width: 100%;
