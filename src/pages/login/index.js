@@ -34,9 +34,9 @@ const Login = ({ setLogedIn }) => {
       sequence: ['0', '1', '2', '3', '5', '8', '?', 'infinity', 'coffee']
     })
 
+    history.push(`/${data?.room?.code}`)
     data?.room?._id && setIdRoom(data.room._id)
     setLogedIn(true)
-    history.push(`/${data?.room?.code}`)
   }
   
   const handleJoinRoom = async () => {

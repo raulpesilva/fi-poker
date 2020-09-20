@@ -1,6 +1,7 @@
 import React from 'react'
 import api from '../../api';
 import useStorage from '../../hook/useStorage';
+import Button from '../shared/button';
 import * as Styled from './styles'
 
 const Voting = ({ title, description, id, roomId }) => {
@@ -15,6 +16,13 @@ const Voting = ({ title, description, id, roomId }) => {
       vote: vote.toString(), 
       userId
     })
+    console.log(data);
+  }
+
+  const handleClickFinish = async () => {
+    //:roomId/cards/:cardId/stage
+    const { data } = await api.post(`/rooms/${roomId}/cards/${id}/stage`, {});
+
     console.log(data);
   }
 
@@ -52,6 +60,10 @@ const Voting = ({ title, description, id, roomId }) => {
         <Styled.Card  color="voteCoffee"onClick={() => handleSelectVote('coffee')}>
           <Styled.CoffeeIcon />
         </Styled.Card>
+
+        <Styled.WrapperButton>
+          <Button width='184px' height='64px' color='green' textColor='highlight' onClick={handleClickFinish}>Finalizar</Button>
+        </Styled.WrapperButton>
       </Styled.WrapperCards>
     </Styled.Container>
   )
