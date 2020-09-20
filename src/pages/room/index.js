@@ -15,9 +15,9 @@ const Room = () => {
   const [socket, setSocket] = useState({})
   const [idRoom] = useStorage('idRoom')
   const [cards, setCards] = useStorage('cards')
+  const [voteSessionFinished, setVoteSessionFinished] = useStorage('voteSessionFinished')
   const [, setUsers] = useStorage('users')
 
-  // const { idRoom } = useParams()
   const getAtualList = useCallback(async () => {
     const { data } = await api.get(`/rooms/${idRoom}`)
 
@@ -63,25 +63,36 @@ const Room = () => {
         console.log('cccccccccccccccaaa', card, cards)
         if (card) {
           sendMessage({ type: 'voting', title: card.name, description: card.desc })
+          setVoteSessionFinished(false)
         }
       }
     })
     socket.on('VOTE_SESSION_FINISHED', data => {
       if (data.data.roomId === idRoom) {
         console.log('VOTE_SESSION_FINISHED', data)
+        setVoteSessionFinished(true)
       }
     })
     socket.on('VOTE_UPDATED', data => {
-      if (data.data.roomId === idRoom) {
+      if (data.data.roomId === idRoom && !voteSessionFinished) {
         console.log('VOTE_UPDATED', data)
       }
     })
     socket.on('CARD_VOTED', data => {
-      if (data.data.roomId === idRoom) {
+      if (data.data.roomId === idRoom && !voteSessionFinished) {
         console.log('CARD_VOTED', data)
       }
     })
-  }, [socket, cards, idRoom, getUsers, getAtualList, sendMessage])
+  }, [
+    socket,
+    cards,
+    idRoom,
+    getUsers,
+    getAtualList,
+    sendMessage,
+    setVoteSessionFinished,
+    voteSessionFinished,
+  ])
 
   useEffect(() => {
     getUsers()

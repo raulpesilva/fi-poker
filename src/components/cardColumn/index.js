@@ -51,25 +51,18 @@ const CardColumn = () => {
         <EditableCard onCardCreate={handleOnCardCreate}>Criar tarefa</EditableCard>
         <Styled.IntegrationIcon onClick={authTrello} />
       </Styled.CreatorWrapper>
-      {cardList.map(({ title, description, _id }) => (
-        <Card
-          title={title}
-          description={description}
-          key={_id}
-          id={_id}
-          onDelete={handleOnCardDelete}
-        />
-      ))}
-      {cards?.cardList?.map(card => (
-        <Card
-          onClick={() => handleSelectCard(card)}
-          title={card.name}
-          description={card.desc}
-          key={card.id}
-          id={card.id}
-          onDelete={handleOnCardDelete}
-        />
-      ))}
+      <Styled.Scroll>
+        {cards?.cardList?.map(card => (
+          <Card
+            onClick={() => handleSelectCard(card)}
+            title={card.name}
+            description={card.desc}
+            key={card.id}
+            id={card.id}
+            onDelete={handleOnCardDelete}
+          />
+        ))}
+      </Styled.Scroll>
     </Styled.Container>
   )
 }

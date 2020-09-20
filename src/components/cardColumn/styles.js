@@ -8,9 +8,8 @@ export const Container = styled.ul`
   border-radius: ${({ theme }) => theme.radii.normal}px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   padding: 13px;
-  width: 294px;
+  width: 310px;
   height: 90vh;
   margin-right: 10px;
 `
@@ -32,4 +31,11 @@ export const IntegrationIcon = styled(FaTrello)`
   &:hover {
     transform: scale(0.9);
   }
+`
+export const Scroll = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  /* margin-right: 5px; */
 `
