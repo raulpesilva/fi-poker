@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Card from '../card'
-import CreatorButton from '../creatorButton'
 import EditableCard from '../editableCard'
 import * as Styled from './styles'
 

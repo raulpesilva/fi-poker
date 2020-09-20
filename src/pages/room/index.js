@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../components/shared/button'
 import CardColumn from '../../components/cardColumn'
 import useModal from '../../hook/useModal'
 import { useParams } from 'react-router-dom'
 import * as Styled from './styles'
+import UserList from '../../components/UserList'
 const Room = () => {
-  const [teste, setTest] = useState('')
   const { sendMessage } = useModal()
   let { id } = useParams()
   useEffect(() => {
@@ -25,8 +25,10 @@ const Room = () => {
   return (
     <>
       <Button onClick={handleCLick}>Entrar</Button>
+      <Button onClick={handleOpenRoom}>sala</Button>
       <Styled.Main>
-        <CardColumn></CardColumn>
+        <CardColumn />
+        <UserList />
       </Styled.Main>
     </>
   )
