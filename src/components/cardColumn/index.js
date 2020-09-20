@@ -40,7 +40,10 @@ const CardColumn = () => {
     console.log('aquiii', data)
   }
   const handleOnCardCreate = data => {
-    setCardList([...cardList, data])
+    api.post(`/rooms/${idRoom}/cards`, { cards: [data] }).then(response => {
+      console.log('handleCreate', response);
+    })
+
   }
 
   const handleOnCardDelete = id => {
