@@ -102,3 +102,8 @@ export const InfinityIcon = styled(CgInfinity).attrs({ size: 70 })`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.highlight};
 `
+
+export const WrapperButton = styled.div`
+  display: flex;
+  flex-direction: column;
+`
