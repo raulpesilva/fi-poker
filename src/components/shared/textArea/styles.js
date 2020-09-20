@@ -10,12 +10,13 @@ export const TextArea = styled.textarea`
   margin: ${({ margin }) => margin ? margin : 0 };
   padding: 15px;
   resize: none;
+  outline: none;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.highlight}4D;
   };
 
   &:focus{
-    border: 1px solid ${({ theme }) => theme.colors.highlight};
+    border: 1px solid ${({ theme }) => theme.colors.xlightGray}90;
   }
 `
