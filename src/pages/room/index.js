@@ -5,12 +5,16 @@ import useModal from '../../hook/useModal'
 import { useParams } from 'react-router-dom'
 import * as Styled from './styles'
 import UserList from '../../components/UserList'
+
 const Room = () => {
   const { sendMessage } = useModal()
-  let { id } = useParams()
+  const { id } = useParams()
+
   useEffect(() => {
     console.log(id)
-  }, [id])
+  }, [id]);
+
+
   const handleCLick = () => {
     sendMessage({ type: 'default' })
   }
