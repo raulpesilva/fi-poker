@@ -17,6 +17,6 @@ export const Input = styled.input`
   };
 
   &:focus{
-    border: 1px solid ${({ theme }) => theme.colors.highlight};
+    border: 1px solid ${({ theme }) => theme.colors.xlightGray}90;
   }
 `;

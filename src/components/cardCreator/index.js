@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import * as Styled from './styles'
 import Input from '../shared/input'
 import TextArea from '../shared/textArea'
 import Button from '../shared/button'
 
 const CardCreator = ({ onCreate, onCancel }) => {
-  const [value, setValue] = useState({})
-
-  const handleChangeInput = ({ target }) => {
-    const inputValue = target.value
-    setValue({ ...value, name: inputValue })
-  }
-
-  const handleChangeTextarea = ({ target }) => {
-    const textareaValue = target.value
-    setValue({ ...value, description: textareaValue })
-  }
+  const cardId = Math.floor(Math.random() * 999999);
+  const titleRef = useRef()
+  const descriptionRef = useRef()
 
   const hendleClickConclude = () => {
-    onCreate && onCreate(value);
+    const title = titleRef?.current?.value;
+    const description = descriptionRef?.current?.value;
+
+    console.log({ title, description, _id: cardId });
+    onCreate && onCreate({ name: title, description, _id: cardId });
   }
 
   const hendleClickCancel = () => {
     onCancel && onCancel();
   }
 
-  useEffect(() => {
-    console.log(value)
-  }, [value]);
-
   return (
     <Styled.Container>
-      <Input width="100%" placeholder="Nome" onChange={handleChangeInput}></Input>
-      <TextArea margin="9px 0" placeholder="Descrição" onChange={handleChangeTextarea}></TextArea>
+      <Input width="100%" placeholder="Nome" ref={titleRef}></Input>
+      <TextArea margin="9px 0" placeholder="Descrição" ref={descriptionRef}></TextArea>
       <Styled.ButtonWrapper>
         <Button
           width="80px"

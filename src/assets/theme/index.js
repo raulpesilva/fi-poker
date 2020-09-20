@@ -8,6 +8,7 @@ const theme = {
     green: '#2ECC71',
     red: '#E74C3C',
     blue: '#2E9BCC',
+    xlightGray: '#cccccc',
   },
   radii: {
     normal: 8,
@@ -15,6 +16,8 @@ const theme = {
   fontSize: {
     header: 42,
     title: 18,
+    paragraph: 14,
+    small: 11
   },
 }
 
