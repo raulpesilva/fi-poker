@@ -5,16 +5,16 @@ import EditableCard from '../editableCard'
 import * as Styled from './styles'
 
 const CardColumn = () => {
-  const [ cardList, setCardList ] = useState([]);
+  const [cardList, setCardList] = useState([])
 
   const handleOnCardCreate = data => {
-    setCardList([...cardList, data]);
+    setCardList([...cardList, data])
   }
 
   const handleOnCardDelete = id => {
-    const newCardList = cardList.filter(({ _id }) => _id !== id);
+    const newCardList = cardList.filter(({ _id }) => _id !== id)
 
-    setCardList(newCardList);
+    setCardList(newCardList)
   }
 
   return (
@@ -23,9 +23,15 @@ const CardColumn = () => {
         <EditableCard onCardCreate={handleOnCardCreate}>Criar tarefa</EditableCard>
         <Styled.IntegrationIcon></Styled.IntegrationIcon>
       </Styled.CreatorWrapper>
-      { cardList.map(({ name, description, _id }) => 
-        <Card title={name} description={description} key={_id} id={_id} onDelete={handleOnCardDelete}/>
-      ) }
+      {cardList.map(({ title, description, _id }) => (
+        <Card
+          title={title}
+          description={description}
+          key={_id}
+          id={_id}
+          onDelete={handleOnCardDelete}
+        />
+      ))}
     </Styled.Container>
   )
 }
