@@ -5,13 +5,13 @@ import Card from '../card'
 import EditableCard from '../editableCard'
 import * as Styled from './styles'
 import api from '../../api'
-import { useParams } from 'react-router-dom'
 
 const CardColumn = () => {
   const [cardList, setCardList] = useState([])
   const { sendMessage } = useModal()
   const [cards] = useStorage('cards')
-  const { id } = useParams()
+  const [idRoom] = useStorage('idRoom')
+
   const authTrello = () => {
     var authenticationSuccess = function () {
       // console.log('Successful authentication')
@@ -34,8 +34,8 @@ const CardColumn = () => {
     })
   }
   const handleSelectCard = async card => {
-    // const a = await api.post(`/rooms/${id}/cards/${card.id}/stage`)
-    const { data } = await api.get(`/rooms/${id}`)
+    const a = await api.post(`/rooms/${idRoom}/cards/${card.id}/stage`)
+    const { data } = await api.get(`/rooms/${idRoom}`)
 
     console.log('aquiii', data)
   }

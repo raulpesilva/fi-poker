@@ -3,11 +3,9 @@ import useStorageContext from './useStorageContext'
 
 const useStorage = name => {
   const [state, dispatch] = useStorageContext()
-  const getItem = useCallback(() => {
-    try {
-      const value = localStorage.getItem(name)
-      return JSON.parse(value)
-    } catch (error) {}
+  const getItem = useCallback(async () => {
+    const value = await localStorage.getItem(name)
+    return JSON.parse(value)
   }, [name])
 
   const setItem = useCallback(
@@ -29,7 +27,7 @@ const useStorage = name => {
     } catch (error) {}
   }
   useEffect(() => {
-    // getItem?.().then(data => data && setItem(data))
+    getItem().then(data => data && setItem(data))
   }, [getItem, setItem])
 
   return [state[name], setItem, removeItem, state]

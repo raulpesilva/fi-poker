@@ -5,6 +5,9 @@ export const Container = styled.div`
   height: 90vh;
   background-color: ${({ theme }) => theme.colors.darkGray};
   border-radius: ${({ theme }) => theme.radii.normal}px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 10px;
 `
 
 export const User = styled.div`

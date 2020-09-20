@@ -7,13 +7,14 @@ import * as Styled from './styles'
 import UserList from '../../components/UserList'
 
 import io from 'socket.io-client'
+import useStorage from '../../hook/useStorage'
 
 const SOCKET_ORIGIN = 'http://ec2-54-201-21-116.us-west-2.compute.amazonaws.com/'
 
 const Room = () => {
   const { sendMessage } = useModal()
   const [socket, setSocket] = useState({})
-  // let { id } = useParams()
+  const [cards] = useStorage('cards')
 
   useEffect(() => {
     if (!(socket && socket.on)) {
@@ -31,6 +32,11 @@ const Room = () => {
     })
     socket.on('CARD_STAGED_TO_VOTE', data => {
       console.log('CARD_STAGED_TO_VOTE', data)
+      const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
+      // console.log('cccccccccccccccaaa', card, cards)
+      if (card) {
+        sendMessage({ type: 'voting', title: card.name, description: card.desc })
+      }
     })
     socket.on('VOTE_SESSION_FINISHED', data => {
       console.log('VOTE_SESSION_FINISHED', data)
@@ -42,7 +48,7 @@ const Room = () => {
       console.log('CARD_VOTED', data)
     })
     // return () => socket && socket.disconnect && socket.disconnect()
-  }, [socket])
+  }, [cards, sendMessage, socket])
 
   useEffect(() => {
     setSocket(io(SOCKET_ORIGIN, {}))
@@ -64,7 +70,7 @@ const Room = () => {
       <Button onClick={handleCLick}>Entrar</Button>
       <Button onClick={handleOpenRoom}>sala</Button>
       <Styled.Main>
-        <CardColumn/>
+        <CardColumn />
         <UserList />
       </Styled.Main>
     </>
