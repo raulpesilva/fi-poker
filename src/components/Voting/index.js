@@ -20,7 +20,6 @@ const Voting = ({ title, description, id, roomId }) => {
   }
 
   const handleClickFinish = async () => {
-    //:roomId/cards/:cardId/stage
     const { data } = await api.post(`/rooms/${roomId}/cards/${id}/stage`, {});
 
     console.log(data);

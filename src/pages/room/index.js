@@ -50,22 +50,14 @@ const Room = () => {
         getUsers()
       }
     })
-    socket.on('NEW_CARDS_ADDED', data => {
+
+    socket.on('CARD_DELETED', data => {
       if (data.data.roomId === idRoom) {
-        console.log('NEW_CARDS_ADDED', data)
+        console.log('CARD_DELETED', data)
         getAtualList()
       }
     })
-    socket.on('CARD_STAGED_TO_VOTE', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('CARD_STAGED_TO_VOTE', data)
-        const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
-        console.log('cccccccccccccccaaa', card, cards)
-        if (card) {
-          sendMessage({ id: card.id ,type: 'voting', title: card.name, description: card.desc, roomId: data.data.roomId })
-        }
-      }
-    })
+
     socket.on('VOTE_SESSION_FINISHED', data => {
       if (data.data.roomId === idRoom) {
         console.log('VOTE_SESSION_FINISHED', data)
@@ -81,7 +73,31 @@ const Room = () => {
         console.log('CARD_VOTED', data)
       }
     })
-  }, [socket, cards, idRoom, getUsers, getAtualList, sendMessage])
+  }, [socket, idRoom, getUsers, getAtualList, sendMessage])
+
+  useEffect(() => {
+    if (!(socket && socket.on)) {
+      return
+    }
+
+    socket.on('NEW_CARDS_ADDED', data => {
+      if (data.data.roomId === idRoom) {
+        console.log('NEW_CARDS_ADDED', data)
+        getAtualList()
+      }
+    })
+
+    socket.on('CARD_STAGED_TO_VOTE', data => {
+      if (data.data.roomId === idRoom) {
+        console.log('CARD_STAGED_TO_VOTE', data)
+        const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
+        console.log('cccccccccccccccaaa', card, cards)
+        if (card) {
+          sendMessage({ id: card.id ,type: 'voting', title: card.name, description: card.desc, roomId: data.data.roomId })
+        }
+      }
+    })
+  }, [cards])
 
   useEffect(() => {
     getUsers()

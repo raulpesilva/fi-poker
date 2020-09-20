@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import api from '../../api'
+import useStorage from '../../hook/useStorage'
 import * as Styled from './styles'
 
 const Card = ({ title, description, characterLimit = 100, id, onDelete, ...rest }) => {
   const [removing, setRemoving] = useState(false)
+  const [idRoom] = useStorage('idRoom')
+
 
   const ellipisDescription =
     description &&
@@ -13,11 +17,17 @@ const Card = ({ title, description, characterLimit = 100, id, onDelete, ...rest 
       return (acc += letter)
     }, '')
 
-  const handleOnCardRemove = () => {
+  const handleOnCardRemove = (e) => {
+    e.stopPropagation();
     setRemoving(true)
   }
 
-  const handleConfirmRemove = () => {
+  const handleConfirmRemove = async (e) => {
+    e.stopPropagation();
+
+    const { data } = await api.delete(`/rooms/${idRoom}/cards/${id}`);
+
+    console.log(data);
     onDelete && onDelete(id)
   }
 
