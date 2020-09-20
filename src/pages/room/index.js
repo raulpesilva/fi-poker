@@ -7,6 +7,7 @@ import * as Styled from './styles'
 import UserList from '../../components/UserList'
 
 import io from 'socket.io-client'
+import api from '../../api'
 import useStorage from '../../hook/useStorage'
 
 const SOCKET_ORIGIN = 'http://ec2-54-201-21-116.us-west-2.compute.amazonaws.com/'
@@ -14,7 +15,10 @@ const SOCKET_ORIGIN = 'http://ec2-54-201-21-116.us-west-2.compute.amazonaws.com/
 const Room = () => {
   const { sendMessage } = useModal()
   const [socket, setSocket] = useState({})
-  const [cards] = useStorage('cards')
+  const [idRoom] = useStorage('idRoom')
+  const [cards, setCards] = useStorage('cards')
+
+  // const { idRoom } = useParams()
 
   useEffect(() => {
     if (!(socket && socket.on)) {
@@ -49,6 +53,22 @@ const Room = () => {
     })
     // return () => socket && socket.disconnect && socket.disconnect()
   }, [cards, sendMessage, socket])
+
+  const getAtualList = async () => {
+    const { data } = await api.get(`/rooms/${idRoom}`)
+
+    const formatedData = data?.cards?.reduce((acc, card) => {
+      return [...acc, { name: card.title, desc: card.description, id: card._id }]
+    }, [])
+
+    console.log('formateddata', formatedData)
+
+    setCards({ cardList: formatedData })
+  }
+
+  useEffect(() => {
+    getAtualList()
+  }, [idRoom])
 
   useEffect(() => {
     setSocket(io(SOCKET_ORIGIN, {}))
