@@ -7,7 +7,7 @@ import Modal from '../components/Modal'
 import Voting from '../components/Voting'
 
 const Routes = () => {
-  const logado = true
+  const logado = false
   return (
     <BrowserRouter>
       <Switch>
