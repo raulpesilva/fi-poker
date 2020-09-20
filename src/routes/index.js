@@ -8,7 +8,7 @@ import Voting from '../components/Voting'
 import SelectBoard from '../components/SelectBoard'
 
 const Routes = () => {
-  const logado = false
+  const logado = true
   return (
     <BrowserRouter>
       <Switch>

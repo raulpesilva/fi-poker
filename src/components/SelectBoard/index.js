@@ -10,7 +10,10 @@ const SelectBoard = () => {
   const [lists, setLists] = useState([])
   const [_, setCards] = useStorage('cards')
   useEffect(() => {
-    window.Trello.get('/members/me/boards').then(setBoards)
+    window.Trello.get('/members/me/boards').then(response => {
+      setBoards(response)
+      console.log(response)
+    })
   }, [])
   const handleSelectBoard = board => {
     //https://api.trello.com/1/boards/${listkey}/lists?key=${key}&token=${token}
@@ -22,7 +25,7 @@ const SelectBoard = () => {
   const handleSelectList = list => {
     //https://api.trello.com/1/lists/${listkey}/cards?key=${key}&token=${token}
     window.Trello.get(`/lists/${list.id}/cards`).then(response => {
-      console.log(response)
+      console.log('vnjbvnkdvnkb', response)
       setCards(response)
     })
   }
@@ -30,7 +33,11 @@ const SelectBoard = () => {
     <Styled.Container onClick={handleStop}>
       <Styled.Wrapper>
         {boards.map(board => (
-          <Styled.Card key={board.id} onClick={() => handleSelectBoard(board)}>
+          <Styled.Card
+            url={board.prefs.backgroundImage}
+            key={board.id}
+            onClick={() => handleSelectBoard(board)}
+          >
             <Styled.Title>{board.name}</Styled.Title>
           </Styled.Card>
         ))}

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   width: 90vw;
@@ -25,12 +25,24 @@ export const Card = styled.div`
   background-color: ${({ theme }) => theme.colors.lightGray};
   margin-left: 10px;
   margin-top: 10px;
-
+  padding: 10px;
+  box-sizing: border-box;
   border-radius: ${({ theme }) => theme.radii.normal}px;
+  ${({ url }) =>
+    url &&
+    css`
+      background-image: url(${url});
+      background-size: cover;
+    `}
 `
 export const Title = styled.h4`
   color: ${({ theme }) => theme.colors.highlight};
   font-size: ${({ theme }) => theme.fontSize.title}px;
+  text-shadow: 0 0 6px #000000dc;
+  font-weight: 600;
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
 `
 export const Wrapper = styled.div`
   width: 100%;
