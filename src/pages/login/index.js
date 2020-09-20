@@ -13,30 +13,30 @@ const Login = ({ setLogedIn }) => {
   const roomIdRef = useRef()
   const newRoomRef = useRef()
   const { id } = useParams()
-  const [ ,setIdRoom ] = useStorage('idRoom')
-  const history = useHistory();
+  const [, setIdRoom] = useStorage('idRoom')
+  const history = useHistory()
 
   const handleCreateRoom = async () => {
-    const newRoomName = newRoomRef.current.value;
-    const userName = nameRef.current.value;
-    
-    const { data } = await api.post('/rooms',  {
-      roomName: newRoomName,
-      userName
-    });
+    const newRoomName = newRoomRef.current.value
+    const userName = nameRef.current.value
 
-    setIdRoom(data._id);
-    setLogedIn(true);
-    history.push(`/${data.code}`);
+    const { data } = await api.post('/rooms', {
+      roomName: newRoomName,
+      userName,
+    })
+
+    setIdRoom(data._id)
+    setLogedIn(true)
+    history.push(`/${data.code}`)
   }
 
   const handleJoinRoom = async () => {
-    const newRoomName = id ?? roomIdRef.current.value;
-    const userName = nameRef.current.value;
+    const newRoomName = id ?? roomIdRef.current.value
+    const userName = nameRef.current.value
 
-    const { data } = await api.post(`/rooms/join/${newRoomName}`,  {
-      name: userName
-    });
+    const { data } = await api.post(`/rooms/join/${newRoomName}`, {
+      name: userName,
+    })
 
     setLogedIn(true)
     setIdRoom(data._id)
@@ -46,21 +46,23 @@ const Login = ({ setLogedIn }) => {
     <Styled.Container>
       <Styled.Form>
         <Styled.Title>Fi Poker</Styled.Title>
-        <Input placeholder="Seu nome" ref={nameRef}/>
-        { !id &&<Styled.SeparatorLarge />}
-        { !id && <Input placeholder="Sala" ref={roomIdRef}/>}
+        <Input placeholder="Seu nome" ref={nameRef} />
+        {!id && <Styled.SeparatorLarge />}
+        {!id && <Input placeholder="Sala" ref={roomIdRef} />}
         <Styled.Separator />
         <Button onClick={handleJoinRoom}>Entrar</Button>
         <Styled.SeparatorMedium />
-        { !id && <Styled.WrapperDivision>
-          <Styled.Line />
-          <Styled.DivisionText>ou</Styled.DivisionText>
-          <Styled.Line />
-        </Styled.WrapperDivision>}
-        { !id && <Styled.SeparatorMedium />}
-        { !id && <Input placeholder="Nome da sala" ref={newRoomRef}/>}
+        {!id && (
+          <Styled.WrapperDivision>
+            <Styled.Line />
+            <Styled.DivisionText>ou</Styled.DivisionText>
+            <Styled.Line />
+          </Styled.WrapperDivision>
+        )}
+        {!id && <Styled.SeparatorMedium />}
+        {!id && <Input placeholder="Nome da sala" ref={newRoomRef} />}
         <Styled.Separator />
-        { !id && <Button onClick={handleCreateRoom}>Criar sala</Button>}
+        {!id && <Button onClick={handleCreateRoom}>Criar sala</Button>}
       </Styled.Form>
       <Styled.Image src={image} />
     </Styled.Container>

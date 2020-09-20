@@ -10,33 +10,36 @@ const SelectBoard = () => {
   const [boards, setBoards] = useState([])
   const [lists, setLists] = useState([])
   const [_, setCards] = useStorage('cards')
-  const [ idRoom ] = useStorage('idRoom')
+  const [idRoom] = useStorage('idRoom')
 
   useEffect(() => {
     window.Trello.get('/members/me/boards').then(response => {
+      // console.log(response)
       setBoards(response)
     })
   }, [])
   const handleSelectBoard = board => {
     window.Trello.get(`/boards/${board.id}/lists`).then(response => {
-      console.log(response)
+      // console.log(response)
       setLists(response)
     })
   }
   const handleSelectList = list => {
     window.Trello.get(`/lists/${list.id}/cards`).then(response => {
-      setCards({cardList: response, list});
+      setCards({ cardList: response, list })
 
       const formatedCards = response?.reduce((acc, card) => {
+        return [...acc, { title: card.name, description: card.desc, meta: response.list }]
+      }, [])
 
-        return [...acc, { title: card.name, description: card.desc, meta: response.list}]
-      }, []);
-  
-      api.post(`/rooms/${idRoom}/cards`, { cards: formatedCards}).then(data => {
-        console.log('dataaaaaaaa', data);
-      }).catch(error => {
-        console.log(error);
-      })
+      api
+        .post(`/rooms/${idRoom}/cards`, { cards: formatedCards })
+        .then(data => {
+          console.log('dataaaaaaaa', data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     })
   }
   return (

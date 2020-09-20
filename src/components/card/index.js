@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as Styled from './styles'
 
-const Card = ({ title, description, characterLimit = 100, id, onDelete }) => {
+const Card = ({ title, description, characterLimit = 100, id, onDelete, ...rest }) => {
   const [removing, setRemoving] = useState(false)
 
   const ellipisDescription =
@@ -22,7 +22,7 @@ const Card = ({ title, description, characterLimit = 100, id, onDelete }) => {
   }
 
   return (
-    <Styled.Container>
+    <Styled.Container {...rest}>
       <Styled.RemoveWrapper>
         {removing ? (
           <Styled.RemoveConfirmation onClick={handleConfirmRemove}>

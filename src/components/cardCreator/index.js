@@ -13,7 +13,6 @@ const CardCreator = ({ onCreate, onCancel }) => {
     const title = titleRef?.current?.value
     const description = descriptionRef?.current?.value
 
-    console.log({ title, description, _id: cardId })
     onCreate && onCreate({ title, description, _id: cardId })
   }
 
