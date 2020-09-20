@@ -4,7 +4,7 @@ import Login from '../pages/login'
 import Room from '../pages/room'
 
 const Routes = () => {
-  const [logedIn, setLogedIn] = useState(false)
+  const [ logedIn, setLogedIn ] = useState(false)
 
   return (
     <BrowserRouter>
