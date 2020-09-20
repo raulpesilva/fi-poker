@@ -29,7 +29,7 @@ const useStorage = name => {
     } catch (error) {}
   }
   useEffect(() => {
-    getItem().then(data => data && setItem(data))
+    // getItem?.().then(data => data && setItem(data))
   }, [getItem, setItem])
 
   return [state[name], setItem, removeItem, state]

@@ -1,10 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import useStorage from '../../hook/useStorage'
+import useModal from '../../hook/useModal'
 import Card from '../card'
 import EditableCard from '../editableCard'
 import * as Styled from './styles'
 
 const CardColumn = () => {
   const [cardList, setCardList] = useState([])
+  const { sendMessage } = useModal()
+  const [cards] = useStorage('cards')
+  const authTrello = () => {
+    var authenticationSuccess = function () {
+      console.log('Successful authentication')
+      sendMessage({ type: 'selectBoard' })
+    }
+
+    var authenticationFailure = function () {
+      console.log('Failed authentication')
+    }
+
+    window.Trello.authorize({
+      type: 'popup',
+      name: 'localhost',
+      scope: {
+        read: 'true',
+      },
+      expiration: 'never',
+      success: authenticationSuccess,
+      error: authenticationFailure,
+    })
+  }
 
   const handleOnCardCreate = data => {
     setCardList([...cardList, data])
@@ -15,12 +40,14 @@ const CardColumn = () => {
 
     setCardList(newCardList)
   }
-
+  useEffect(() => {
+    console.log('aquiiii', cards)
+  }, [cards])
   return (
     <Styled.Container>
       <Styled.CreatorWrapper>
         <EditableCard onCardCreate={handleOnCardCreate}>Criar tarefa</EditableCard>
-        <Styled.IntegrationIcon></Styled.IntegrationIcon>
+        <Styled.IntegrationIcon onClick={authTrello} />
       </Styled.CreatorWrapper>
       {cardList.map(({ title, description, _id }) => (
         <Card
@@ -30,6 +57,9 @@ const CardColumn = () => {
           id={_id}
           onDelete={handleOnCardDelete}
         />
+      ))}
+      {cards?.map(({ name, desc, id }) => (
+        <Card title={name} description={desc} key={id} id={id} onDelete={handleOnCardDelete} />
       ))}
     </Styled.Container>
   )

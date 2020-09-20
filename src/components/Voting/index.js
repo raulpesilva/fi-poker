@@ -5,6 +5,7 @@ const Voting = ({ title, description }) => {
   const handleClick = e => {
     e.stopPropagation()
   }
+
   return (
     <Styled.Container onClick={handleClick}>
       <Styled.Title>{title}</Styled.Title>
