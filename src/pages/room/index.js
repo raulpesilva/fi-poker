@@ -15,7 +15,7 @@ const Room = () => {
     console.log(id)
   }, [id])
   const handleCLick = () => {
-    sendMessage()
+    sendMessage({ type: 'default' })
   }
 
   const handleOpenRoom = () => {
