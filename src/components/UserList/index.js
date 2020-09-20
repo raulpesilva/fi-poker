@@ -21,7 +21,7 @@ const UserList = () => {
     <Styled.Container>
       {users?.map((user, index) => {
         return (
-          <Styled.User key={user._id}>
+          <Styled.User key={user?._id ?? Math.round(Math.random() * 999).toString()}>
             <Styled.initial color={colorDictionary[index % colorDictionary.length]}>
               {user?.userName?.[0] ?? user?.name?.[0] ?? 'FI'}
             </Styled.initial>

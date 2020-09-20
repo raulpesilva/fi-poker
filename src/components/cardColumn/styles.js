@@ -35,7 +35,4 @@ export const IntegrationIcon = styled(FaTrello)`
 export const Scroll = styled.div`
   flex: 1;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column-reverse;
-  /* margin-right: 5px; */
 `

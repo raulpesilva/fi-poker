@@ -35,7 +35,7 @@ const CardColumn = () => {
   }
   const handleOnCardCreate = data => {
     api.post(`/rooms/${idRoom}/cards`, { cards: [data] }).then(response => {
-      console.log('handleCreate', response)
+      // console.log('handleCreate', response)
     })
   }
 

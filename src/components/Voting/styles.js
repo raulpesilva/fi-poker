@@ -43,9 +43,18 @@ export const Description = styled.p`
 export const Board = styled.div`
   flex: 1;
   width: 80%;
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
   background-color: ${({ theme }) => theme.colors.darkGray};
   border-radius: ${({ theme }) => theme.radii.normal}px;
+  div {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  &:first-child {
+    margin-left: 0;
+  }
 `
 export const WrapperCards = styled.div`
   margin-top: 10px;
@@ -68,9 +77,9 @@ const colors = {
   voteCoffee: 'top, #FEB124 0%, #FEB24A 100%',
 }
 export const Card = styled.div`
-  background: -webkit-linear-gradient(top, #c3cec2 0%, #131313 100%); /* Chrome10-25,Safari5.1-6 */
   background: -webkit-linear-gradient(
-    ${({ color }) => (color ? colors[color] : 'top, #c3cec2 0%, #131313 100%')}
+    ${({ color, theme }) =>
+      color ? colors[color] : `top, ${theme.colors.gray} 0%, ${theme.colors.gray} 100%`}
   ); /* Chrome10-25,Safari5.1-6 */
   border-radius: ${({ theme }) => theme.radii.normal}px;
   width: 115px;

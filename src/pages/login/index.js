@@ -26,30 +26,28 @@ const Login = ({ setLogedIn }) => {
       userName,
     })
 
-    setUserId(data.owner._id);
-    
-    const roomId = data.room?._id;
-    
-    const { data: dataConfig } = await api.post(`/rooms/${roomId}/config`, {
-      sequence: ['0', '1', '2', '3', '5', '8', '?', 'infinity', 'coffee']
+    setUserId(data.owner._id)
+
+    const roomId = data.room?._id
+
+    api.post(`/rooms/${roomId}/config`, {
+      sequence: ['0', '1', '2', '3', '5', '8', '?', 'infinity', 'coffee'],
     })
 
     data?.room?._id && setIdRoom(data.room._id)
     setLogedIn(true)
     history.push(`/${data?.room?.code}`)
   }
-  
+
   const handleJoinRoom = async () => {
     const newRoomName = id ?? roomIdRef.current.value
     const userName = nameRef.current.value
-    
+
     const { data } = await api.post(`/rooms/join/${newRoomName}`, {
       name: userName,
     })
 
-    
-    setUserId(data._id);
-    
+    setUserId(data._id)
     setLogedIn(true)
   }
 

@@ -16,7 +16,8 @@ const Room = () => {
   const [idRoom] = useStorage('idRoom')
   const [cards, setCards] = useStorage('cards')
   const [voteSessionFinished, setVoteSessionFinished] = useStorage('voteSessionFinished')
-  const [, setUsers] = useStorage('users')
+  const [votes, setVotes] = useStorage('votes')
+  const [users, setUsers] = useStorage('users')
 
   const getAtualList = useCallback(async () => {
     const { data } = await api.get(`/rooms/${idRoom}`)
@@ -28,12 +29,15 @@ const Room = () => {
     setCards({ cardList: formatedData })
   }, [idRoom, setCards])
 
-  const getUsers = useCallback(() => {
-    api.get(`/rooms/${idRoom}`).then(({ data }) => {
-      setUsers(data.participants)
-      console.log(data.participants)
-    })
-  }, [idRoom, setUsers])
+  const getUsers = useCallback(
+    user => {
+      api.get(`/rooms/${idRoom}`).then(({ data }) => {
+        setUsers(data.participants)
+        // console.log(data.participants)
+      })
+    },
+    [idRoom, setUsers]
+  )
   useEffect(() => {
     if (!(socket && socket.on)) {
       return
@@ -60,7 +64,7 @@ const Room = () => {
       if (data.data.roomId === idRoom) {
         console.log('CARD_STAGED_TO_VOTE', data)
         const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
-        console.log('cccccccccccccccaaa', card, cards)
+        // console.log('cccccccccccccccaaa', card, cards)
         if (card) {
           sendMessage({
             id: card.id,
@@ -86,6 +90,12 @@ const Room = () => {
     socket.on('CARD_VOTED', data => {
       if (data.data.roomId === idRoom && !voteSessionFinished) {
         console.log('CARD_VOTED', data)
+        if (votes?.[0]) {
+          setVotes([...votes, data.data])
+          console.log([...votes, data.data])
+        } else {
+          setVotes([data.data])
+        }
       }
     })
   }, [
