@@ -5,6 +5,7 @@ import useModal from '../../hook/useModal'
 // import { useParams } from 'react-router-dom'
 import * as Styled from './styles'
 import UserList from '../../components/UserList'
+
 import io from 'socket.io-client'
 
 const SOCKET_ORIGIN = 'http://ec2-54-201-21-116.us-west-2.compute.amazonaws.com/'
