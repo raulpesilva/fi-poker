@@ -8,11 +8,12 @@ const SelectBoard = () => {
   }
   const [boards, setBoards] = useState([])
   const [lists, setLists] = useState([])
-  const [_, setCards] = useStorage('cards')
+  const setCards = useStorage('cards')[1]
+
   useEffect(() => {
     window.Trello.get('/members/me/boards').then(response => {
-      setBoards(response)
       console.log(response)
+      setBoards(response)
     })
   }, [])
   const handleSelectBoard = board => {
