@@ -29,9 +29,12 @@ const useModalContext = () => {
 const useModal = () => {
   const [state, dispatch] = useModalContext()
 
-  const sendMessage = useCallback(value => {
-    dispatch({ type: 'set', payload: value })
-  }, [])
+  const sendMessage = useCallback(
+    value => {
+      dispatch({ type: 'set', payload: value })
+    },
+    [dispatch]
+  )
 
   return { state, sendMessage }
 }

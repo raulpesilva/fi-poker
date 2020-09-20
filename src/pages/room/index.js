@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Button from '../../components/shared/button'
 import CardColumn from '../../components/cardColumn'
 import useModal from '../../hook/useModal'
-// import { useParams } from 'react-router-dom'
 import * as Styled from './styles'
 import UserList from '../../components/UserList'
 
@@ -26,8 +24,6 @@ const Room = () => {
     const formatedData = data?.cards?.reduce((acc, card) => {
       return [...acc, { name: card.title, desc: card.description, id: card._id }]
     }, [])
-
-    console.log('formateddata', formatedData)
 
     setCards({ cardList: formatedData })
   }, [idRoom, setCards])
@@ -85,8 +81,7 @@ const Room = () => {
         console.log('CARD_VOTED', data)
       }
     })
-    // return () => socket && socket.disconnect && socket.disconnect()
-  }, [socket, cards])
+  }, [socket, cards, idRoom, getUsers, getAtualList, sendMessage])
 
   useEffect(() => {
     getUsers()
