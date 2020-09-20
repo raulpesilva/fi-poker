@@ -4,14 +4,11 @@ import useModal from '../../hook/useModal'
 import Card from '../card'
 import EditableCard from '../editableCard'
 import * as Styled from './styles'
-import api from '../../api'
-import { useParams } from 'react-router-dom'
 
 const CardColumn = () => {
   const [cardList, setCardList] = useState([])
   const { sendMessage } = useModal()
   const [ cards ] = useStorage('cards')
-  const { id } = useParams()
 
   const authTrello = () => {
     var authenticationSuccess = function () {

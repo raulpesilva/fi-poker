@@ -13,9 +13,11 @@ const SelectBoard = () => {
   const [ idRoom ] = useStorage('idRoom')
 
 
-
   useEffect(() => {
-    window.Trello.get('/members/me/boards').then(setBoards)
+    window.Trello.get('/members/me/boards').then(response => {
+      console.log(response)
+      setBoards(response)
+    })
   }, [])
   const handleSelectBoard = board => {
     window.Trello.get(`/boards/${board.id}/lists`).then(response => {
@@ -43,7 +45,11 @@ const SelectBoard = () => {
     <Styled.Container onClick={handleStop}>
       <Styled.Wrapper>
         {boards.map(board => (
-          <Styled.Card key={board.id} onClick={() => handleSelectBoard(board)}>
+          <Styled.Card
+            url={board.prefs.backgroundImage}
+            key={board.id}
+            onClick={() => handleSelectBoard(board)}
+          >
             <Styled.Title>{board.name}</Styled.Title>
           </Styled.Card>
         ))}
