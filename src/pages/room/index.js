@@ -73,7 +73,7 @@ const Room = () => {
         console.log('CARD_VOTED', data)
       }
     })
-  }, [socket, idRoom, getUsers, getAtualList, sendMessage])
+  }, [socket,cards, idRoom, getUsers, getAtualList, sendMessage])
 
   useEffect(() => {
     if (!(socket && socket.on)) {
@@ -97,7 +97,7 @@ const Room = () => {
         }
       }
     })
-  }, [cards])
+  }, [socket, cards])
 
   useEffect(() => {
     getUsers()
