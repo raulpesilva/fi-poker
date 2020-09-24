@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../api'
-import useStorage from '../../hook/useStorage'
+import useGlobalState from '../../hook/useGlobalState'
 import * as Styled from './styles'
 
 const SelectBoard = () => {
@@ -9,8 +9,8 @@ const SelectBoard = () => {
   }
   const [boards, setBoards] = useState([])
   const [lists, setLists] = useState([])
-  const [, setCards] = useStorage('cards')
-  const [idRoom] = useStorage('idRoom')
+  const [, setCards] = useGlobalState('cards')
+  const [idRoom] = useGlobalState('idRoom')
 
   useEffect(() => {
     window.Trello.get('/members/me/boards').then(response => {

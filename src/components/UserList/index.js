@@ -1,6 +1,6 @@
 import React from 'react'
 
-import useStorage from '../../hook/useStorage'
+import useGlobalState from '../../hook/useGlobalState'
 import * as Styled from './styles'
 
 const colorDictionary = [
@@ -16,7 +16,7 @@ const colorDictionary = [
 ]
 
 const UserList = () => {
-  const [users] = useStorage('users')
+  const [users] = useGlobalState('users')
   return (
     <Styled.Container>
       {users?.map((user, index) => {

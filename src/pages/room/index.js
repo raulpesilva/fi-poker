@@ -1,23 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import CardColumn from '../../components/cardColumn'
-import useModal from '../../hook/useModal'
+import React, { useCallback, useEffect } from 'react'
 import * as Styled from './styles'
+import CardColumn from '../../components/cardColumn'
 import UserList from '../../components/UserList'
 
-import io from 'socket.io-client'
 import api from '../../api'
-import useStorage from '../../hook/useStorage'
-
-const SOCKET_ORIGIN = 'http://ec2-54-201-21-116.us-west-2.compute.amazonaws.com/'
+import useGlobalState from '../../hook/useGlobalState'
+import useRealTimeRoom from '../../hook/useRealTimeRoom'
+import useRealTimeCard from '../../hook/useRealTimeCard'
+import useRealTimeVote from '../../hook/useRealTimeVote'
 
 const Room = () => {
-  const { sendMessage } = useModal()
-  const [socket, setSocket] = useState({})
-  const [idRoom] = useStorage('idRoom')
-  const [cards, setCards] = useStorage('cards')
-  const [voteSessionFinished, setVoteSessionFinished] = useStorage('voteSessionFinished')
-  const [votes, setVotes] = useStorage('votes')
-  const [users, setUsers] = useStorage('users')
+  useRealTimeCard()
+  useRealTimeRoom()
+  useRealTimeVote()
+  const [idRoom] = useGlobalState('idRoom')
+  const [, setCards] = useGlobalState('cards')
+  const [, setUsers] = useGlobalState('users')
 
   const getAtualList = useCallback(async () => {
     const { data } = await api.get(`/rooms/${idRoom}`)
@@ -27,101 +25,16 @@ const Room = () => {
     }, [])
 
     data?.cards && setCards({ cardList: formatedData })
-    console.log('asdfasdasdfasdfasdf', idRoom)
   }, [idRoom, setCards])
 
   const getUsers = useCallback(
     user => {
       api.get(`/rooms/${idRoom}`).then(({ data }) => {
         data?.participants && setUsers(data?.participants)
-        // console.log(data.participants)
       })
     },
     [idRoom, setUsers]
   )
-  useEffect(() => {
-    if (!(socket && socket.on)) {
-      return
-    }
-
-    socket.on('ROOM_CONFIG_UPDATED', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('ROOM_CONFIG_UPDATED', data)
-      }
-    })
-    socket.on('NEW_ROOM_PARTICIPANT', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('NEW_ROOM_PARTICIPANT', data)
-        getUsers()
-        getAtualList()
-      }
-    })
-    socket.on('NEW_CARDS_ADDED', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('NEW_CARDS_ADDED', data)
-        getAtualList()
-      }
-    })
-
-    socket.on('CARD_STAGED_TO_VOTE', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('CARD_STAGED_TO_VOTE', data)
-        const card = cards?.cardList?.find?.(c => c.id === data.data.cardId)
-        console.log('cccccccccccccccaaa', card, cards)
-        if (card) {
-          sendMessage({
-            id: card.id,
-            type: 'voting',
-            title: card.name,
-            description: card.desc,
-            roomId: data.data.roomId,
-          })
-        }
-      }
-    })
-    socket.on('CARD_DELETED', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('CARD_DELETED', data)
-        getAtualList()
-      }
-    })
-    socket.on('VOTE_SESSION_FINISHED', data => {
-      if (data.data.roomId === idRoom) {
-        console.log('VOTE_SESSION_FINISHED', data)
-        setVoteSessionFinished(true)
-      }
-    })
-    socket.on('VOTE_UPDATED', data => {
-      if (data.data.roomId === idRoom && !voteSessionFinished) {
-        console.log('VOTE_UPDATED', data)
-        setVoteSessionFinished(true)
-      }
-    })
-    socket.on('CARD_VOTED', data => {
-      if (data.data.roomId === idRoom && !voteSessionFinished) {
-        console.log('CARD_VOTED', data)
-        setVoteSessionFinished(true)
-
-        if (votes?.[0]) {
-          setVotes([...votes, data.data])
-          console.log([...votes, data.data])
-        } else {
-          setVotes([data.data])
-        }
-      }
-    })
-  }, [
-    socket,
-    cards,
-    idRoom,
-    getUsers,
-    getAtualList,
-    sendMessage,
-    setVoteSessionFinished,
-    voteSessionFinished,
-    votes,
-    setVotes,
-  ])
 
   useEffect(() => {
     getUsers()
@@ -130,10 +43,6 @@ const Room = () => {
   useEffect(() => {
     getAtualList()
   }, [getAtualList])
-
-  useEffect(() => {
-    setSocket(io(SOCKET_ORIGIN, {}))
-  }, [])
 
   return (
     <>

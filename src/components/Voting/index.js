@@ -1,29 +1,27 @@
 import React from 'react'
 import api from '../../api'
-import useStorage from '../../hook/useStorage'
+import useGlobalState from '../../hook/useGlobalState'
 import Button from '../shared/button'
 import * as Styled from './styles'
 
 const Voting = ({ title, description, id, roomId }) => {
-  const [userId] = useStorage('userId')
-  const [votes] = useStorage('votes')
-  const [voteSessionFinished] = useStorage('voteSessionFinished')
+  const [userId] = useGlobalState('userId')
+  const [votes] = useGlobalState('votes')
+  const [voteSessionFinished, setVoteSessionFinished] = useGlobalState('voteSessionFinished')
 
   const handleClick = e => {
     e.stopPropagation()
   }
 
   const handleSelectVote = async vote => {
-    const { data } = await api.post(`/rooms/${roomId}/cards/${id}/vote`, {
+    api.post(`/rooms/${roomId}/cards/${id}/vote`, {
       vote: vote.toString(),
       userId,
     })
   }
 
   const handleClickFinish = async () => {
-    const { data } = await api.post(`/rooms/${roomId}/cards/${id}/stage`, {})
-
-    console.log(data)
+    await api.post(`/rooms/${roomId}/cards/${id}/stage`, {})
   }
 
   return (
@@ -34,8 +32,10 @@ const Voting = ({ title, description, id, roomId }) => {
       <Styled.Board>
         {votes?.map?.((vote, index) => {
           return (
-            <Styled.Card vote={`card-${index}-${Math.random() * 9999}`}>
-              {console.log(voteSessionFinished)}
+            <Styled.Card
+              onClick={() => setVoteSessionFinished(true)}
+              vote={`card-${index}-${Math.random() * 9999}`}
+            >
               {voteSessionFinished && <Styled.Points>{vote.vote}</Styled.Points>}
             </Styled.Card>
           )

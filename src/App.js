@@ -4,7 +4,7 @@ import * as Styled from './styles'
 import theme from './assets/theme'
 import Routes from './routes'
 import './index.css'
-import { StorageProvider } from './hook/useStorage'
+import { GlobalStateProvider } from './hook/useGlobalState'
 import { ModalProvider } from './hook/useModal'
 import Modal from './components/Modal'
 import Voting from './components/Voting'
@@ -14,14 +14,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyle />
-
-      <StorageProvider>
+      <GlobalStateProvider>
         <ModalProvider modals={{ default: Modal, voting: Voting, selectBoard: SelectBoard }}>
           <Styled.App>
             <Routes />
           </Styled.App>
         </ModalProvider>
-      </StorageProvider>
+      </GlobalStateProvider>
     </ThemeProvider>
   )
 }

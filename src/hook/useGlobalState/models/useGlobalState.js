@@ -1,8 +1,8 @@
-import { useCallback } from 'react'
-import GlobalStateContext from './useGlobalState'
+import { useCallback, useEffect } from 'react'
+import useGlobalStateContext from './useGlobalStateContext'
 
-const useGlobalState = name => {
-  const [state, dispatch] = GlobalStateContext()
+const useGlobalState = (name, initialState) => {
+  const [state, dispatch] = useGlobalStateContext()
 
   const setItem = useCallback(
     value => {
@@ -20,6 +20,9 @@ const useGlobalState = name => {
       dispatch({ type: 'clear', payload: { name } })
     } catch (error) {}
   }
+  useEffect(() => {
+    !state[name] ?? initialState ?? setItem(initialState)
+  }, [initialState, name, setItem])
 
   return [state[name], setItem, removeItem, state]
 }

@@ -6,15 +6,15 @@ import Input from '../../components/shared/input'
 import Button from '../../components/shared/button'
 import { useParams } from 'react-router-dom'
 import api from '../../api'
-import useStorage from '../../hook/useStorage'
+import useGlobalState from '../../hook/useGlobalState'
 
 const Login = ({ setLogedIn }) => {
   const nameRef = useRef()
   const roomIdRef = useRef()
   const newRoomRef = useRef()
   const { id } = useParams()
-  const [, setIdRoom] = useStorage('idRoom')
-  const [, setUserId] = useStorage('userId')
+  const [, setIdRoom] = useGlobalState('idRoom')
+  const [, setUserId] = useGlobalState('userId')
   const history = useHistory()
 
   const handleCreateRoom = async () => {
@@ -49,7 +49,6 @@ const Login = ({ setLogedIn }) => {
       name: userName,
     })
     setIdRoom(room._id)
-    console.log(room)
     setUserId(participant._id)
     setLogedIn(true)
   }

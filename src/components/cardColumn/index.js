@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import useStorage from '../../hook/useStorage'
+import useGlobalState from '../../hook/useGlobalState'
 import useModal from '../../hook/useModal'
 import Card from '../card'
 import EditableCard from '../editableCard'
@@ -9,8 +9,8 @@ import api from '../../api'
 const CardColumn = () => {
   const [cardList, setCardList] = useState([])
   const { sendMessage } = useModal()
-  const [cards] = useStorage('cards')
-  const [idRoom] = useStorage('idRoom')
+  const [cards] = useGlobalState('cards')
+  const [idRoom] = useGlobalState('idRoom')
 
   const authTrello = () => {
     var authenticationSuccess = function () {
